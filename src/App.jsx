@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import Weather from './Weather'
-import './App.css'
+import { useEffect, useState } from "react";
+import Weather from "./Weather";
+/*import "./App.css";*/
 
 function App() {
   const [lat, setLat] = useState([]);
@@ -10,33 +10,36 @@ function App() {
   const apiData = {
     apiKey: import.meta.env.VITE_WETTER_API_KEY,
     apiUrl: import.meta.env.VITE_WETTER_API_URL,
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      navigator.geolocation.getCurrentPosition(function(position) {
+      navigator.geolocation.getCurrentPosition(function (position) {
         setLat(position.coords.latitude);
         setLong(position.coords.longitude);
       });
 
-      const response = await fetch(`${apiData.apiUrl}/current.json?key=${apiData.apiKey}&q=${lat},${long}`);
+      const response = await fetch(
+        `${apiData.apiUrl}/current.json?key=${apiData.apiKey}&q=${lat},${long}`
+      );
       const weatherData = await response.json();
       console.log(weatherData);
       setData(weatherData);
-    }
+    };
     fetchData();
   }, [apiData.apiKey, apiData.apiUrl, lat, long]);
 
   return (
-    <div className='App'>
-      {(typeof data.location != 'undefined') ? (
-        <Weather data={data} />
-      ): (
-        <div></div>
-      )}
-    
-    </div>
-  )
+    <>
+      <div className="App">
+        {typeof data.location != "undefined" ? (
+          <Weather data={data} />
+        ) : (
+          <div></div>
+        )}
+      </div>
+    </>
+  );
 }
 
-export default App
+export default App;
