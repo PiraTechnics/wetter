@@ -9,16 +9,9 @@ function CurrentWeather({ data }) {
   const [tempType, setTempType] = useState(data.current.temp_f);
   const handleChange = (val) => setTempType(val);
 
-  /*   const absSettings = "position-absolute top-50 start-50 justify-content-center translate-middle bg-info-subtle border border-light border-3 rounded py-2"; */
-
-  // border-light border-3
-
   return (
     <>
-      <Container
-        style={{ minWidth: "35vw" }}
-        className="bg-info-subtle border rounded py-2"
-      >
+      <Container className="bg-info-subtle border rounded py-2">
         <Row className="">
           <Col xs={4}>
             <div className="d-flex justify-content-center">

@@ -4,10 +4,10 @@ import DayWeather from "./DayWeather";
 
 /* eslint-disable react/prop-types */
 function Dashboard({ data }) {
-  if (typeof data.location != "undefined") {
-    return (
-      <>
-        <Container fluid style={{ padding: "0px" }}>
+  return (
+    <>
+      <Container fluid style={{ padding: "0px" }}>
+        {data.location ? (
           <Row className="g-2" style={{ minWidth: "250px" }}>
             <Col xs={12} sm={6}>
               <CurrentWeather data={data} />
@@ -16,17 +16,9 @@ function Dashboard({ data }) {
               <DayWeather data={data} />
             </Col>
           </Row>
-        </Container>
-      </>
-    );
-  }
-  return (
-    <>
-      <Container fluid style={{ padding: "0px" }}>
-        <Row>
-          <Col xs={6}></Col>
-          <Col xs={6}></Col>
-        </Row>
+        ) : (
+          <Row></Row>
+        )}
       </Container>
     </>
   );
