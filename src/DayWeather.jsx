@@ -7,6 +7,7 @@ import {
   ToggleButton,
 } from "react-bootstrap";
 import { useState } from "react";
+import "./TempToggle.css";
 
 function DayWeather({ data }) {
   const tempStats_f = {
@@ -46,26 +47,30 @@ function DayWeather({ data }) {
         style={{ minWidth: "35vw" }}
         className="bg-info-subtle border rounded py-2"
       >
-        <Row className="fs-5">
+        <Row className="fs-5 pb-1">
           <Col xs={4} className="fw-semibold">
             Forecast:
           </Col>
-          <Col className="text-start text-decoration-underline">
+          <Col className="text-center text-decoration-underline">
             {formatDate(data.forecast.forecastday[0].date)}
           </Col>
         </Row>
-        <Row>
+        <Row className="pb-1">
           <Col xs={3}>
-            <span>High {tempStats.high}</span>
+            <div className="text-decoration-underline">High</div>
+            {tempStats.high}°
           </Col>
           <Col xs={3}>
-            <span>Low {tempStats.low}</span>
+            <div className="text-decoration-underline">Low</div>
+            {tempStats.low}°
           </Col>
           <Col xs={3}>
-            <span>Avg {tempStats.avg}</span>
+            <div className="text-decoration-underline">Avg</div>
+            {tempStats.avg}°
           </Col>
-          <Col xs={3}>
+          <Col xs={3} className="toggle-button-container">
             <ToggleButtonGroup
+              className="toggle-button-group"
               type="radio"
               name="dayTemps"
               defaultValue={"f"}
@@ -90,6 +95,7 @@ function DayWeather({ data }) {
             </ToggleButtonGroup>
           </Col>
         </Row>
+        <Row></Row>
       </Container>
     </>
   );

@@ -19,17 +19,19 @@ function CurrentWeather({ data }) {
         style={{ minWidth: "35vw" }}
         className="bg-info-subtle border rounded py-2"
       >
-        <Row className="align-items-center justify-items-center">
-          <Col xs={3}>
-            <Image
-              src={data.current.condition.icon}
-              alt={data.current.condition.text}
-            />
-          </Col>
+        <Row className="">
           <Col xs={4}>
-            <span className="fs-3 fw-medium">{tempType}</span>
+            <div className="d-flex justify-content-center">
+              <Image
+                fluid
+                src={data.current.condition.icon}
+                alt={data.current.condition.text}
+                style={{ minWidth: "64px" }}
+              />
+            </div>
           </Col>
-          <Col>
+          <Col xs={8} className="d-flex align-items-center">
+            <span className="fs-3 fw-medium px-2">{tempType}°</span>
             <ToggleButtonGroup
               type="radio"
               name="tempTypes"

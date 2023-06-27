@@ -1,0 +1,9 @@
+@media (max-width: 340px) /*Custim spec for converting toggle button to verical*/ {
+    .toggle-button-container {
+        overflow-x: auto;
+      }
+
+    .toggle-button-group {
+      flex-direction: column;
+    }
+}
