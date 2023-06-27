@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import Weather from "./Weather";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Dashboard from "./Dashboard";
+import Container from "react-bootstrap/Container";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 function App() {
   const [lat, setLat] = useState([]);
@@ -20,7 +22,7 @@ function App() {
       });
 
       const response = await fetch(
-        `${apiData.apiUrl}/current.json?key=${apiData.apiKey}&q=${lat},${long}`
+        `${apiData.apiUrl}/forecast.json?key=${apiData.apiKey}&q=${lat},${long}`
       );
       const weatherData = await response.json();
       console.log(weatherData);
@@ -32,11 +34,9 @@ function App() {
   return (
     <>
       <div className="App">
-        {typeof data.location != "undefined" ? (
-          <Weather data={data} />
-        ) : (
-          <div></div>
-        )}
+        <Container fluid id="dashboard" style={{ padding: "0px" }}>
+          <Dashboard data={data} />
+        </Container>
       </div>
     </>
   );
