@@ -4,11 +4,11 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Navbar from "react-bootstrap/Navbar";
 import Image from "react-bootstrap/Image";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import Dashboard from "./Dashboard";
 import CurrentDateTime from "./CurrentDateTime,";
 import iconUrl from "./assets/wetter-icon.png";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 function App() {
   const [lat, setLat] = useState([]);
@@ -42,18 +42,17 @@ function App() {
     <>
       <div className="App">
         <Navbar className="bg-info-subtle border rounded mb-2" sticky="top">
-          <Container>
-            <Row>
+          <Container fluid>
+            <Row className="header-row" style={{ width: "100vw" }}>
               <Col
-                sm={6}
-                className="bg-info border rounded-5 border-dark-subtle border-2 p-1"
-                style={{ maxWidth: "200px" }}
+                xs={12}
+                className="header-col bg-info border rounded-5 border-dark-subtle border-2 p-1 mx-2"
               >
-                <Image src={iconUrl} alt="cloud with"></Image>
+                <Image src={iconUrl} alt="wetter cloud icon"></Image>
                 {"  "}
                 <span className="fw-semibold fs-3 align-middle">Wetter</span>
               </Col>
-              <Col className="align-self-center">
+              <Col className="header-col align-self-center">
                 <CurrentDateTime />
               </Col>
             </Row>

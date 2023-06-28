@@ -68,7 +68,10 @@ function DayWeather({ data }) {
             <div className="text-decoration-underline">Avg</div>
             {tempStats.avg}°
           </Col>
-          <Col xs={3} className="toggle-button-container">
+          <Col
+            xs={3}
+            className="toggle-button-container d-flex align-items-center"
+          >
             <ToggleButtonGroup
               className="toggle-button-group"
               type="radio"
