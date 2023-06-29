@@ -6,7 +6,7 @@ import {
   ToggleButtonGroup,
   ToggleButton,
 } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./TempToggle.css";
 
 function DayWeather({ data }) {
@@ -30,6 +30,21 @@ function DayWeather({ data }) {
       setTempStats(tempStats_f);
     }
   };
+
+  //Query for xs screens, so we can toggle button verticality
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const mQuery = window.matchMedia("(max-width: 340px)");
+    setIsSmallScreen(mQuery.matches);
+
+    function updateIsSmallScreen(e) {
+      setIsSmallScreen(e.matches);
+    }
+    mQuery.addEventListener("change", updateIsSmallScreen);
+
+    return () => mQuery.removeEventListener("change", updateIsSmallScreen);
+  }, []);
 
   function formatDate(localTimeString) {
     var options = {
@@ -55,6 +70,7 @@ function DayWeather({ data }) {
             {formatDate(data.forecast.forecastday[0].date)}
           </Col>
         </Row>
+        <hr className="mt-1 mb-2" />
         <Row className="pb-1">
           <Col xs={3}>
             <div className="text-decoration-underline">High</div>
@@ -70,13 +86,14 @@ function DayWeather({ data }) {
           </Col>
           <Col
             xs={3}
-            className="toggle-button-container d-flex align-items-center"
+            className="toggle-button-container d-flex align-items-center ps-0"
           >
             <ToggleButtonGroup
               className="toggle-button-group"
               type="radio"
               name="dayTemps"
               defaultValue={"f"}
+              vertical={isSmallScreen}
               onChange={handleChange}
             >
               <ToggleButton

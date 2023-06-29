@@ -24,7 +24,7 @@ function CurrentWeather({ data }) {
             </div>
           </Col>
           <Col xs={8} className="d-flex align-items-center">
-            <span className="fs-3 fw-medium px-2">{tempType}°</span>
+            <span className="fs-3 fw-medium pe-2">{tempType}°</span>
             <ToggleButtonGroup
               type="radio"
               name="tempTypes"
