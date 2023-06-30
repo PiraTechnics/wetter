@@ -2,6 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import CurrentWeather from "./CurrentWeather";
 import DayWeather from "./DayWeather";
 import HourWeather from "./HourWeather";
+import DaysAheadWeather from "./DaysAheadWeather";
 
 /* eslint-disable react/prop-types */
 function Dashboard({ data }) {
@@ -20,6 +21,11 @@ function Dashboard({ data }) {
           <Row className="mb-2">
             <Col>
               <HourWeather data={data} />
+            </Col>
+          </Row>
+          <Row className="mb-2">
+            <Col>
+              <DaysAheadWeather data={data} />
             </Col>
           </Row>
         </>

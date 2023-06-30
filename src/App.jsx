@@ -30,7 +30,7 @@ function App() {
       });
 
       const response = await fetch(
-        `${apiData.apiUrl}/forecast.json?key=${apiData.apiKey}&q=${lat},${long}&days=2`
+        `${apiData.apiUrl}/forecast.json?key=${apiData.apiKey}&q=${lat},${long}&days=10`
       );
       const weatherData = await response.json();
       console.log(weatherData);
