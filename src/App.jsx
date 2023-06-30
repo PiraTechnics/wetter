@@ -21,7 +21,8 @@ function App() {
   };
 
   useEffect(() => {
-    //Fetch Weather Data from API
+    //Fetch Weather Data from API for browser location
+    //Note: how would we override this/change the default for a user entering a location?
     const fetchData = async () => {
       navigator.geolocation.getCurrentPosition(function (position) {
         setLat(position.coords.latitude);
@@ -29,7 +30,7 @@ function App() {
       });
 
       const response = await fetch(
-        `${apiData.apiUrl}/forecast.json?key=${apiData.apiKey}&q=${lat},${long}`
+        `${apiData.apiUrl}/forecast.json?key=${apiData.apiKey}&q=${lat},${long}&days=2`
       );
       const weatherData = await response.json();
       console.log(weatherData);
@@ -40,7 +41,7 @@ function App() {
 
   return (
     <>
-      <div className="App">
+      <div className="App" style={{ minWidth: "350px" }}>
         <Navbar className="bg-info-subtle border rounded mb-2" sticky="top">
           <Container fluid>
             <Row className="header-row" style={{ width: "100vw" }}>

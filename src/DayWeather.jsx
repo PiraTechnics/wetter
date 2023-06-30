@@ -7,7 +7,6 @@ import {
   ToggleButton,
 } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import "./TempToggle.css";
 
 function DayWeather({ data }) {
   const tempStats_f = {
@@ -20,6 +19,8 @@ function DayWeather({ data }) {
     low: data.forecast.forecastday[0].day.mintemp_c,
     avg: data.forecast.forecastday[0].day.avgtemp_c,
   };
+
+  const dayForecast = data.forecast.forecastday[0].day;
 
   const [tempStats, setTempStats] = useState(tempStats_f);
   const handleChange = (val) => {
@@ -74,15 +75,15 @@ function DayWeather({ data }) {
         <Row className="pb-1">
           <Col xs={3}>
             <div className="text-decoration-underline">High</div>
-            {tempStats.high}°
+            <span className="fw-bold">{tempStats.high}°</span>
           </Col>
           <Col xs={3}>
             <div className="text-decoration-underline">Low</div>
-            {tempStats.low}°
+            <span className="fw-bold">{tempStats.low}°</span>
           </Col>
           <Col xs={3}>
             <div className="text-decoration-underline">Avg</div>
-            {tempStats.avg}°
+            <span className="fw-bold">{tempStats.avg}°</span>
           </Col>
           <Col
             xs={3}
@@ -115,7 +116,16 @@ function DayWeather({ data }) {
             </ToggleButtonGroup>
           </Col>
         </Row>
-        <Row></Row>
+        <Row className="text-start">
+          <Col xs={6}>
+            Average Humidity:{" "}
+            <span className="fw-bold">{dayForecast.avghumidity}%</span>
+          </Col>
+          <Col xs={6}>
+            Chance of Rain:{" "}
+            <span className="fw-bold">{dayForecast.daily_chance_of_rain}%</span>
+          </Col>
+        </Row>
       </Container>
     </>
   );
