@@ -1,60 +1,28 @@
 /* eslint-disable react/prop-types */
-import {
-  Container,
-  Row,
-  Col,
-  ToggleButtonGroup,
-  ToggleButton,
-} from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 
-function DayWeather({ data }) {
-  const tempStats_f = {
-    high: data.forecast.forecastday[0].day.maxtemp_f,
-    low: data.forecast.forecastday[0].day.mintemp_f,
-    avg: data.forecast.forecastday[0].day.avgtemp_f,
-  };
-  const tempStats_c = {
-    high: data.forecast.forecastday[0].day.maxtemp_c,
-    low: data.forecast.forecastday[0].day.mintemp_c,
-    avg: data.forecast.forecastday[0].day.avgtemp_c,
+function DayWeather({ data, units }) {
+  const tempStats = {
+    high: data.forecast.forecastday[0].day["maxtemp_" + units],
+    low: data.forecast.forecastday[0].day["mintemp_" + units],
+    avg: data.forecast.forecastday[0].day["avgtemp_" + units],
   };
 
   const dayForecast = data.forecast.forecastday[0].day;
 
-  const [tempStats, setTempStats] = useState(tempStats_f);
-  const handleChange = (val) => {
-    if (val == "c") {
-      setTempStats(tempStats_c);
-    } else {
-      //farenheit by default
-      setTempStats(tempStats_f);
-    }
-  };
-
-  //Query for xs screens, so we can toggle button verticality
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-
-  useEffect(() => {
-    const mQuery = window.matchMedia("(max-width: 340px)");
-    setIsSmallScreen(mQuery.matches);
-
-    function updateIsSmallScreen(e) {
-      setIsSmallScreen(e.matches);
-    }
-    mQuery.addEventListener("change", updateIsSmallScreen);
-
-    return () => mQuery.removeEventListener("change", updateIsSmallScreen);
-  }, []);
-
-  function formatDate(localTimeString) {
+  function formatDate(dateString) {
     var options = {
       year: "numeric",
       month: "long",
       day: "numeric",
     };
 
-    return new Date(localTimeString).toLocaleDateString([], options);
+    //split datestring into pieces because JS date is partcular
+    const dateArr = dateString.split("-");
+    return new Date(dateArr[0], dateArr[1], dateArr[2]).toLocaleDateString(
+      "en-us",
+      options
+    );
   }
 
   return (
@@ -73,19 +41,19 @@ function DayWeather({ data }) {
         </Row>
         <hr className="mt-1 mb-2" />
         <Row className="pb-1">
-          <Col xs={3}>
+          <Col xs={4}>
             <div className="text-decoration-underline">High</div>
             <span className="fw-bold">{tempStats.high}°</span>
           </Col>
-          <Col xs={3}>
+          <Col xs={4}>
             <div className="text-decoration-underline">Low</div>
             <span className="fw-bold">{tempStats.low}°</span>
           </Col>
-          <Col xs={3}>
+          <Col xs={4}>
             <div className="text-decoration-underline">Avg</div>
             <span className="fw-bold">{tempStats.avg}°</span>
           </Col>
-          <Col
+          {/*           <Col
             xs={3}
             className="toggle-button-container d-flex align-items-center ps-0"
           >
@@ -114,16 +82,16 @@ function DayWeather({ data }) {
                 °C
               </ToggleButton>
             </ToggleButtonGroup>
-          </Col>
+          </Col> */}
         </Row>
-        <Row className="text-start">
+        <Row className="text-center">
           <Col xs={6}>
-            Average Humidity:{" "}
-            <span className="fw-bold">{dayForecast.avghumidity}%</span>
+            <span className="text-decoration-underline">Humidity</span>
+            <div className="fw-bold">{dayForecast.avghumidity}%</div>
           </Col>
           <Col xs={6}>
-            Chance of Rain:{" "}
-            <span className="fw-bold">{dayForecast.daily_chance_of_rain}%</span>
+            <span className="text-decoration-underline">Precipitation</span>
+            <div className="fw-bold">{dayForecast.daily_chance_of_rain}%</div>
           </Col>
         </Row>
       </Container>

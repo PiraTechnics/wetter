@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Container, Row, Col, Image } from "react-bootstrap";
 
-function HourWeather({ data }) {
+function HourWeather({ data, units }) {
   const hourlyForecast = data.forecast.forecastday[0].hour.concat(
     data.forecast.forecastday[1].hour
   );
@@ -39,7 +39,7 @@ function HourWeather({ data }) {
                 alt={hour.condition.text}
                 style={{ maxWidth: "45px" }}
               ></Image>
-              {hour.temp_f}°
+              {hour["temp_" + units]}°
             </Col>
           ))}
         </Row>

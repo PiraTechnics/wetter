@@ -2,7 +2,7 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { BsArrowUp, BsArrowDown } from "react-icons/bs";
 
-function DaysAheadWeather({ data }) {
+function DaysAheadWeather({ data, units }) {
   const days = data.forecast.forecastday.map((day) => (
     <Col key={day.date_epoch} style={{ maxWidth: "150px" }}>
       <Row>
@@ -22,11 +22,11 @@ function DaysAheadWeather({ data }) {
       <Row>
         <Col className="text-danger">
           <BsArrowUp />
-          {day.day.maxtemp_f}°
+          {day.day["maxtemp_" + units]}°
         </Col>
         <Col className="text-primary">
           <BsArrowDown />
-          {day.day.mintemp_f}°
+          {day.day["mintemp_" + units]}°
         </Col>
       </Row>
     </Col>
