@@ -2,12 +2,17 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { BsArrowUp, BsArrowDown } from "react-icons/bs";
 
+function getWeekday(dateString) {
+  const dateArr = dateString.split("-");
+  return new Date(dateArr[0], dateArr[1] - 1, dateArr[2]).toLocaleDateString('en-us', { weekday: 'long' });
+}
+
 function DaysAheadWeather({ data, units }) {
   const days = data.forecast.forecastday.map((day) => (
     <Col key={day.date_epoch} style={{ maxWidth: "150px" }}>
       <Row>
         <Col className="fw-semibold text-decoration-underline">
-          {new Date(day.date).toDateString()}
+          {getWeekday(day.date)}
         </Col>
       </Row>
       <Row>

@@ -18,8 +18,9 @@ function DayWeather({ data, units }) {
     };
 
     //split datestring into pieces because JS date is partcular
+    //Also subtract 1 from Month number (0-11 index FFS)
     const dateArr = dateString.split("-");
-    return new Date(dateArr[0], dateArr[1], dateArr[2]).toLocaleDateString(
+    return new Date(dateArr[0], dateArr[1] - 1, dateArr[2]).toLocaleDateString(
       "en-us",
       options
     );

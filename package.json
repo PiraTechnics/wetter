@@ -1,7 +1,7 @@
 {
   "name": "wetter",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "homepage": "https://piratechnics.github.io/react-gh-pages",
   "type": "module",
   "scripts": {
