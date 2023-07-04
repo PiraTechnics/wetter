@@ -38,7 +38,7 @@ html, #root {
   }
 
   .header-col {
-    max-width: 40vw;
+    max-width: 95%;
     min-width: 30vw;
   }
 }
