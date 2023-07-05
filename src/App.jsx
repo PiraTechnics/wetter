@@ -67,7 +67,7 @@ function App() {
   return (
     <>
       <div className="App" style={{ minWidth: "250px" }}>
-        <Navbar className="bg-info-subtle border rounded mb-2" sticky="top">
+        <Navbar className="bg-info-subtle border rounded mb-2">
           <Container fluid>
             <Row className="header-row" style={{ width: "100vw", gap: "10px" }}>
               <Col
